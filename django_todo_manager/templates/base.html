@@ -15,7 +15,12 @@
       Base body!
     {% endblock %}
 
-    <footer>&copy; Django</footer>
+    <footer>
+      &copy; Django
+      {% block footer %}
+      
+      {% endblock footer %}
+    </footer>
   </body>
 </html>
 
