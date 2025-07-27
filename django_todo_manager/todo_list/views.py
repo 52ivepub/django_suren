@@ -1,31 +1,46 @@
 from django.shortcuts import render
 from django.http import HttpRequest
 from .models import ToDoItem
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 
 
-class ToDoListIndexView(TemplateView):
+def index_view(request: HttpRequest):
+    todo_items = ToDoItem.objects.all()[:3] 
+    return render(request=request,
+                  template_name="todo_list/index.html",
+                  context={"todo_items": todo_items},
+                  )
+
+
+class ToDoDetailView(DetailView):
+    model = ToDoItem
+
+
+class ToDoListIndexView(ListView):
     template_name = "todo_list/index.html"
+    queryset = ToDoItem.objects.all()[:3] 
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["todo_items"] = ToDoItem.objects.all()
-        return context
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["todo_items"] = ToDoItem.objects.all()
+    #     return context
+
+class ToDoListDoneView(ListView):
+    queryset = ToDoItem.objects.filter(done=True).all() 
+
 
 
 class ToDoListView(ListView):
-    template_name = "todo_list/index.html" 
     model = ToDoItem
-    context_object_name = "todo_items"
+    
+    # def get_context_data(self, **kwargs):
+    #     print(ToDoItem._meta.app_label)
+    #     print(ToDoItem._meta.model_name)
+    #     return super().get_context_data(**kwargs)
 
     
 
 
 
-# def index_view(request: HttpRequest):
-#     todo_items = ToDoItem.objects.all()
-#     return render(request=request,
-#                   template_name="todo_list/index.html",
-#                   context={"todo_items": todo_items},
-#                   )
+
 
