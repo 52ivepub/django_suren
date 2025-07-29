@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpRequest
+from django.urls import reverse
+from .forms import ToDoItemForm
 from .models import ToDoItem
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
 
 
 def index_view(request: HttpRequest):
@@ -39,8 +41,14 @@ class ToDoListView(ListView):
     #     return super().get_context_data(**kwargs)
 
     
+class ToDoItemCreateView(CreateView):
+    model = ToDoItem
+    form_class = ToDoItemForm
 
 
+    def get_success_url(self):
+        return reverse("todo_list:detail", kwargs={"pk": self.object.pk})
+    
 
 
 
