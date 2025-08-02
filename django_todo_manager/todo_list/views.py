@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.urls import reverse
-from .forms import ToDoItemForm
+from .forms import ToDoItemCreateForm, ToDoItemUpdateForm
 from .models import ToDoItem
-from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
 
 
 def index_view(request: HttpRequest):
@@ -43,9 +43,14 @@ class ToDoListView(ListView):
     
 class ToDoItemCreateView(CreateView):
     model = ToDoItem
-    form_class = ToDoItemForm
+    form_class = ToDoItemCreateForm
     # fields= ("title", "description")
 
+
+class ToDoItemUpdateView(UpdateView):
+    model = ToDoItem
+    template_name_suffix = "_update_form"
+    form_class = ToDoItemUpdateForm
 
 
     

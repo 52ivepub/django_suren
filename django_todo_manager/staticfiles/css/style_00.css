@@ -38,4 +38,25 @@ form {
     font-family: 'Times New Roman', Times, serif,;
     font-size:18px;
     font-weight: bold;
+
 }
+
+footer {
+    background: -webkit-linear-gradient(90deg, #fffde7,#0d1f3f,#111635);
+    background: linear-gradient(90deg, #fffde7,#0d1f3f,#111635);
+    padding: 20px;
+    text-align: center;
+    margin-top: auto; 
+    color: rgb(149, 159, 206);/* Прижимает футер к низу */
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 20px;
+    padding: 20px;
+    font-size:18px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+}
+

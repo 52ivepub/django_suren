@@ -1,5 +1,5 @@
 {% extends "todo_list/base.html" %}
-
+ 
 {% block title %}
   Todo List #{{ object.pk }}
 {% endblock title %}
@@ -8,10 +8,14 @@
 {% block body %}
 <h3>ToDo:</h3>
 <div>
-    <div>Title:<strong>{{ object.title }}</strong></div>
-    <div>Done:<strong>{{ object.done }}</strong></div>
-    <div>Description:<strong>{{ object.description }}</strong></div>
+    <div>Title: <strong>{{ object.title }}</strong></div>
+    <div>Done: <strong>{{ object.done }}</strong></div>
+    <div>Description: <strong>{{ object.description }}</strong></div>
 </div>
-  {% include "todo_list/components/todo_items_list.html" %}
+<div>
+  <a href="{% url 'todo_list:update' object.pk %}">
+  <br>
+  Update ToDo Item</a>
+  </div>
   
 {% endblock body %}
