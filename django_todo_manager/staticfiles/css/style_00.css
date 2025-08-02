@@ -1,0 +1,41 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: rgb(209, 208, 206);
+    background-image: url(img/lap.png);
+    /* background-size: 250%; */
+    margin: 2 auto;
+    font-size: 16px;
+}
+
+h1 {
+    text-align: center;
+    background: #d8dde1;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+a {
+    color: #000000cd;
+    font-family: 'Times New Roman', Times, serif,;
+    font-size:18px;
+    font-weight: bold;
+    
+}
+
+p {
+	font-family: 'Times New Roman', Times, serif;
+
+	background: -moz-linear-gradient(10deg, rgb(80, 228, 80), 50%);
+}
+
+span {
+       background: #a4dc43;
+}   
+
+
+form {
+    color: #000000cd;
+    font-family: 'Times New Roman', Times, serif,;
+    font-size:18px;
+    font-weight: bold;
+}
