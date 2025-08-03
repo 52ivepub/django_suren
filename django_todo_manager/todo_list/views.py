@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpRequest
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .forms import ToDoItemCreateForm, ToDoItemUpdateForm
 from .models import ToDoItem
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 def index_view(request: HttpRequest):
@@ -52,6 +52,10 @@ class ToDoItemUpdateView(UpdateView):
     template_name_suffix = "_update_form"
     form_class = ToDoItemUpdateForm
 
+
+class ToDoItemDeleteView(DeleteView):
+    model = ToDoItem
+    success_url = reverse_lazy("todo_list:list")
 
     
 

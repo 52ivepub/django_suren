@@ -12,10 +12,17 @@
     <div>Done: <strong>{{ object.done }}</strong></div>
     <div>Description: <strong>{{ object.description }}</strong></div>
 </div>
-<div>
-  <a href="{% url 'todo_list:update' object.pk %}">
+<ul>
+  <li>
+    <a href="{% url 'todo_list:update' object.pk %}">
+      Update ToDo Item</a>
+  </li>
   <br>
-  Update ToDo Item</a>
-  </div>
+  <li>
+    <a href="{% url 'todo_list:delete' object.pk %}">
+      Delete ToDo Item</a>
+  </li>
+</ul>
   
 {% endblock body %}
+

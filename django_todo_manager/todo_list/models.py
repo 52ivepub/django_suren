@@ -21,4 +21,5 @@ class ToDoItem(models.Model):
     def get_absolute_url(self):
         return reverse("todo_list:detail", kwargs={"pk": self.pk})
     
+    
 
