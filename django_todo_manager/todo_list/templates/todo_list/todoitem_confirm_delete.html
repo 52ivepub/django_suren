@@ -2,21 +2,32 @@
 
 {% block title %}
   Confirm Delete ToDo Item # {{ object.id }}
-
+  
 {% endblock title %}
 
+<style>
+button {
+  border-radius: 50%;
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+}
+</style>
 
 {% block body %}
 <h2>Confirm delete {{ object.title }}</h2>
 <p>
-    Are your sure you want to delete ToDo Item -  "<u>{{ object.title }}</u>",
+    <h4>Are your sure you want to delete ToDo Item -  "<u>{{ object.title }}</u>",
     <br>
-    with description - "<i><u>{{ object.description }}</u></i>"?
+    with description - "<i><u>{{ object.description }}</u></i>"?</h4>
 </p>
 <form method="post">
     {% csrf_token %}
     {{ form}}
-    <button tepe="submit">Delete</button>
+    <button tepe="submit" style="border-radius: 50%;
+      background-color: blue;
+      color: white;
+      padding: 10px 20px;"><h5>Delete</h5></button>
 </form>
 
 <div>
