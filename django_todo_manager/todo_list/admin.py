@@ -5,8 +5,10 @@ from todo_list.models import ToDoItem
 
 @admin.register(ToDoItem)
 class ToDoItemAdmin(admin.ModelAdmin):
-    list_display = "id", "title", "description", "done"
+    list_display = "id", "title", "description", "visible", "done"
     list_display_links = "id", "title"
 
-    def __str__(self):
-        return self.title
+    def visible(self, obj: ToDoItem):
+        return not obj.archived
+
+    visible.boolean = True

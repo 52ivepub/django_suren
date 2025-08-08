@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from .forms import ToDoItemCreateForm, ToDoItemUpdateForm
 from .models import ToDoItem
@@ -15,11 +15,13 @@ def index_view(request: HttpRequest):
 
 
 class ToDoDetailView(DetailView):
-    model = ToDoItem
+    # model = ToDoItem
+    queryset = ToDoItem.objects.filter(archived=False)
 
 
 class ToDoListIndexView(ListView):
     template_name = "todo_list/index.html"
+    # TODO: custom queryset, archive
     queryset = ToDoItem.objects.all()[:3] 
 
     # def get_context_data(self, *args, **kwargs):
@@ -33,7 +35,7 @@ class ToDoListDoneView(ListView):
 
 
 class ToDoListView(ListView):
-    model = ToDoItem
+    queryset = ToDoItem.objects.filter(archived=False)
     
     # def get_context_data(self, **kwargs):
     #     print(ToDoItem._meta.app_label)
@@ -57,7 +59,11 @@ class ToDoItemDeleteView(DeleteView):
     model = ToDoItem
     success_url = reverse_lazy("todo_list:list")
 
-    
+    def form_valid(self, form):
+        success_url = self.get_success_url()
+        self.object.archived = True
+        self.object.save()
+        return HttpResponseRedirect(success_url)
 
 
 
