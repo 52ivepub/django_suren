@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todo_list.apps.TodoListConfig',
+
+    'email_newslatters.apps.EmailNewslattersConfig',
     'debug_toolbar',
 ]
 
@@ -151,3 +153,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         'LOCATION': '127.0.0.1:11211',
 #     }
 # }
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+if DEBUG:
+    EMAIL_HOST = "0.0.0.0" 
+    EMAIL_PORT = 1025
