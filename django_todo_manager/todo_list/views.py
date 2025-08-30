@@ -63,6 +63,7 @@ class ToDoItemDeleteView(DeleteView):
         success_url = self.get_success_url()
         self.object.archived = True
         self.object.save()
+        
         return HttpResponseRedirect(success_url)
 
 

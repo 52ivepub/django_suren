@@ -12,3 +12,14 @@ services:
       driver: "json-file"
       options:
         max-size: "1m"
+
+
+  rabbitmq:
+    image: rabbitmq:3.12-management # Specifies the RabbitMQ image with management UI
+    hostname: rabbitmq # Sets the hostname within the Docker network
+    ports:
+      - "5672:5672" # AMQP port for client connections
+      - "15672:15672" # Management UI port
+    environment:
+      RABBITMQ_DEFAULT_USER: user # Default username
+      RABBITMQ_DEFAULT_PASS: password # Default password
