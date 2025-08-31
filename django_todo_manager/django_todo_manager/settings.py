@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+from importlib.abc import Traversable
 import os
 from pathlib import Path
+from pickle import TRUE
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -159,3 +161,14 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 if DEBUG:
     EMAIL_HOST = "0.0.0.0" 
     EMAIL_PORT = 1025
+
+
+DEFAULT_HOST = "http://127.0.0.1:8000"
+
+CELERY_TIMEZONE = "Europe/Moscow"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BROKER_URL = "amqp://user:password@localhost:5672//"
+CELERY_BACKEND = "rpc://"
+CELERY_RESULT_PERSISTENT = True
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True

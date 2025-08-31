@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
+
+from .tasks import notify_admin_todo_archived
 from .forms import ToDoItemCreateForm, ToDoItemUpdateForm
 from .models import ToDoItem
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+
 
 
 def index_view(request: HttpRequest):
@@ -63,6 +66,7 @@ class ToDoItemDeleteView(DeleteView):
         success_url = self.get_success_url()
         self.object.archived = True
         self.object.save()
+        notify_admin_todo_archived.delay(todo_id=self.object.pk)
         
         return HttpResponseRedirect(success_url)
 
