@@ -8,7 +8,6 @@ from django.template.loader import render_to_string
 
 @shared_task
 def notify_admin_todo_archived(todo_id: int):
-        sleep(5)
         todo = ToDoItem.objects.get(pk=todo_id)
         subject = f"ToDo # {todo.id} {todo.title!r} archived "
         context = {

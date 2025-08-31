@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
+from django.db import transaction
 
 from .tasks import notify_admin_todo_archived
 from .forms import ToDoItemCreateForm, ToDoItemUpdateForm
@@ -62,11 +63,13 @@ class ToDoItemDeleteView(DeleteView):
     model = ToDoItem
     success_url = reverse_lazy("todo_list:list")
 
+    @transaction.atomic
     def form_valid(self, form):
         success_url = self.get_success_url()
         self.object.archived = True
         self.object.save()
-        notify_admin_todo_archived.delay(todo_id=self.object.pk)
+        # notify_admin_todo_archived.delay(todo_id=self.object.pk)
+        notify_admin_todo_archived.delay_on_commit(todo_id=self.object.pk)
         
         return HttpResponseRedirect(success_url)
 
