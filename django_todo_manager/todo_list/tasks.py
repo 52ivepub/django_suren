@@ -8,6 +8,7 @@ from django.template.loader import render_to_string
 
 @shared_task
 def notify_admin_todo_archived(todo_id: int):
+        sleep(10)
         todo = ToDoItem.objects.get(pk=todo_id)
         subject = f"ToDo # {todo.id} {todo.title!r} archived "
         context = {
@@ -26,3 +27,4 @@ def notify_admin_todo_archived(todo_id: int):
         recipient_list=["admin@example.com"],
         fail_silently=False,
         )
+        return f"Sent email about todo # {todo.id}"

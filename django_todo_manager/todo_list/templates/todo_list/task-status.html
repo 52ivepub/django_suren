@@ -1,0 +1,25 @@
+{% extends "todo_list/base.html" %}
+
+{% block title %}
+    Task Status
+{% endblock title %}
+
+
+
+
+{% block body %}
+<h2>Task {{ task_id}} status</h2>
+<div>
+<p><b>Status:</b>status</p> 
+<p><b>Ready:</b>ready</p> 
+<p><b>Result:</b>result</p> 
+
+</div>
+<form method="get">
+{% csrf_token %}
+<label for="task-id">Task ID:</label>
+<input id="task-id" type="text" value="{% firstof task_id '' %}">
+<input type="submit" value="check status">
+</form>
+
+{% endblock body %}

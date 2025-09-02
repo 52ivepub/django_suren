@@ -1,3 +1,4 @@
+from celery.result import AsyncResult
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -72,6 +73,24 @@ class ToDoItemDeleteView(DeleteView):
         notify_admin_todo_archived.delay_on_commit(todo_id=self.object.pk)
         
         return HttpResponseRedirect(success_url)
+
+
+def task_status(request: HttpRequest):
+    task_id  =request.GET.get("task_id") or ""
+    context = {"task_id":  task_id}
+    result = AsyncResult(task_id)
+    context.update(
+        status=result.status,
+        ready=result.ready,
+    )
+    return render(
+        request,
+        template_name="todo_list/task-status.html",
+        context=context,
+
+    )
+
+
 
 
 

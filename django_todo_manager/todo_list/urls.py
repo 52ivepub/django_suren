@@ -2,7 +2,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from .views import ToDoItemCreateView, ToDoItemDeleteView, ToDoItemUpdateView, ToDoListIndexView, ToDoListView, ToDoListDoneView, ToDoDetailView
+from .views import (
+    ToDoItemCreateView,
+    ToDoItemDeleteView,
+    ToDoItemUpdateView, 
+    ToDoListIndexView, 
+    ToDoListView, 
+    ToDoListDoneView, 
+    ToDoDetailView, 
+    task_status,
+    )
 
 app_name = "todo_list"
 
@@ -15,7 +24,7 @@ urlpatterns = [
     path("list/", ToDoListView.as_view(), name='list'), 
     path("done/", ToDoListDoneView.as_view(), name='done'), 
     path("create/", ToDoItemCreateView.as_view(), name='create'), 
-    
+    path("task-status/", task_status, name="task_status"),    
     
 ]
  
