@@ -1,3 +1,4 @@
+from celery import current_app
 from celery.result import AsyncResult
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponseRedirect
@@ -78,10 +79,14 @@ class ToDoItemDeleteView(DeleteView):
 def task_status(request: HttpRequest):
     task_id  =request.GET.get("task_id") or ""
     context = {"task_id":  task_id}
-    result = AsyncResult(task_id)
+    result = AsyncResult(
+                task_id,
+                app = current_app,
+                )
     context.update(
         status=result.status,
         ready=result.ready,
+        result=result.result,
     )
     return render(
         request,
