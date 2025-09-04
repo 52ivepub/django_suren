@@ -60,6 +60,7 @@ INSTALLED_APPS = [
 
     'email_newslatters.apps.EmailNewslattersConfig',
     'debug_toolbar',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -169,6 +170,6 @@ CELERY_TIMEZONE = "Europe/Moscow"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BROKER_URL = "amqp://user:password@localhost:5672//"
-CELERY_RESULT_BACKEND = "rpc://"
+CELERY_RESULT_BACKEND = "django-db"
 CELERY_RESULT_PERSISTENT = True
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
